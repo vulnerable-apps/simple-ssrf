@@ -13,6 +13,27 @@ logger.add(
     colorize=True,
 )
 
+# Log each request
+@app.before_request
+def log_request():
+    # Get method, path, and query parameters
+    method = request.method
+    path = request.path
+    query_string = request.query_string.decode('utf-8')
+    url = f"{path}?{query_string}" if query_string else path
+
+    # Get request body if applicable
+    if request.method in ['POST', 'PUT', 'PATCH']:
+        data = request.get_data(as_text=True)
+    else:
+        data = None
+
+    # Log the request with or without the body
+    log_message = f"{method} {url}"
+    if data:
+        log_message += f" {data}"
+    logger.info(log_message)
+
 @app.route('/')
 def home():
     return 'Try /load?url=http://www.google.com'
