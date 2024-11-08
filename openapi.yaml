@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Simple SSRF API
+  version: "1.0.0"
+  description: This API allows users to load the contents of a URL via a GET request.
+
+paths:
+  /:
+    get:
+      summary: Home endpoint
+      description: Provides instructions for using the `/load` endpoint.
+      responses:
+        '200':
+          description: A welcome message
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Try /load?url=http://www.google.com
+
+  /load:
+    get:
+      summary: Load URL
+      description: Loads the contents of a specified URL.
+      parameters:
+        - in: query
+          name: url
+          required: true
+          schema:
+            type: string
+            format: uri
+          description: The URL to fetch content from.
+      responses:
+        '200':
+          description: Successful response containing the content of the specified URL.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid request (no URL provided).
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: No URL provided
+        '500':
+          description: Server error when trying to load the specified URL.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Error making request
