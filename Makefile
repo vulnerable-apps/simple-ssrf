@@ -12,3 +12,4 @@ publish:
 	docker build --platform linux/amd64 -t insecureapps/simple-ssrf:latest api
 	# push the image to docker hub
 	docker push insecureapps/simple-ssrf
+	echo "View the latest image here: https://hub.docker.com/r/insecureapps/simple-ssrf"

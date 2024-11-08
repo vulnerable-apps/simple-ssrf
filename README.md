@@ -34,13 +34,20 @@ The application exposes a `/load` endpoint that accepts a `url` parameter. Any U
     └── requirements.txt
 ```
 
-## Learning Objectives
+## Using this in a separate environment
 
-Use this lab to:
-- Understand how SSRF vulnerabilities work
-- Practice SSRF exploitation techniques
-- Learn about server-side request validation
-- Test network security controls
+You can host this with docker compose without cloning the repository. Just create a `docker-compose.yml` file with the following content:
+
+```yaml
+services:
+  api:
+    image: insecureapps/simple-ssrf:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - WORKER_COUNT=4
+```
+
 
 ## References
 - [OWASP SSRF Guide](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)
