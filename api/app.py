@@ -40,7 +40,7 @@ def home():
 
 @app.route('/load')
 def load_url():
-    url = request.args.get('url')
+    url = request.args.get('website')
     logger.info(f"Got request URL: {url}")
     if url:
         try:

@@ -24,7 +24,7 @@ paths:
       description: Loads the contents of a specified URL.
       parameters:
         - in: query
-          name: url
+          name: website
           required: true
           schema:
             type: string
